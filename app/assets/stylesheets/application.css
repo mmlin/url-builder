@@ -95,6 +95,11 @@ input[type=text] {
   padding: 10px;
   width: 100%;
 }
+.error {
+  color: #c00;
+  font-size: 13px;
+  margin-top: 10px;
+}
 .url-builder-form-actions {
   background-color: #e6edf1;
   padding: 20px;

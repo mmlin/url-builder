@@ -12,6 +12,7 @@ define(['react', 'components/core'], function (React, Core) {
           <h3>{this.props.title}</h3>
           <p>{this.props.description}</p>
           <Core.TextInput ref="textinput" value={this.props.value} placeholder={this.props.placeholder} />
+          <div className="error {this.props.error ? 'hide' : ''}">{this.props.error}</div>
         </label>
       </div>
     }
@@ -71,24 +72,52 @@ define(['react', 'components/core'], function (React, Core) {
         utmSource: this.refs.utmSource.getValue(),
         utmName: this.refs.utmName.getValue(),
         utmContent: this.refs.utmContent.getValue(),
-        utmTerm: this.refs.utmTerm.getValue()
+        utmTerm: this.refs.utmTerm.getValue(),
+        handleClick: true
       });
       this.refs.result.focus();
     },
 
     getInitialState: function () {
-      return { baseUrl: '', utmMedium: '', utmSource: '',
-               utmName: '', utmContent: '', utmTerm: '' };
+      return { baseUrl: '', utmMedium: '', utmSource: '', utmName: '',
+        utmContent: '', utmTerm: '', handleClick: false };
     },
 
     render: function () {
-      var url = this.buildUrl(this.state.baseUrl, {
-        utm_medium: this.state.utmMedium,
-        utm_source: this.state.utmSource,
-        utm_name: this.state.utmName,
-        utm_content: this.state.utmContent,
-        utm_term: this.state.utmTerm
-      });
+      var baseUrl, url, medium, source, name, content, term, errors;
+
+      // Get the current state.
+      baseUrl = this.state.baseUrl;
+      medium = this.state.utmMedium;
+      source = this.state.utmSource;
+      name = this.state.utmName;
+      content = this.state.utmContent;
+      term = this.state.utmTerm;
+
+      // Check for errors in the values given,
+      // unless this is the initial load of the component.
+      errors = {};
+      if (this.state.handleClick) {
+        if (baseUrl === '')
+          errors.baseUrl = 'Please type in the base URL.';
+        else if (!/^\s*https?:\/\/[\w-]+\.[\w-]+/.test(baseUrl))
+          errors.baseUrl = 'That does not look like a valid URL.'
+        if (medium === '')
+          errors.utmMedium = 'Please enter the campaign medium.';
+        if (medium === '')
+          errors.utmSource = 'Please enter the campaign source.';
+        if (medium === '')
+          errors.utmName = 'Please enter the campaign name.';
+      }
+
+      // Build the URL if there are no errors.
+      url = '';
+      if (!Object.keys(errors).length) {
+        url = this.buildUrl(baseUrl, {
+          utm_medium: medium, utm_source: source, utm_name: name,
+          utm_content: content, utm_term: term
+        });
+      }
 
       return <div className="url-builder-content">
         <div className="url-builder-form">
@@ -96,13 +125,15 @@ define(['react', 'components/core'], function (React, Core) {
           <UrlPart ref="baseUrl"
                    title="What URL do you want to send people to?*"
                    description="This will be the base of your URL."
-                   placeholder="Enter URL" />
+                   placeholder="Enter URL"
+                   error={errors.baseUrl} />
           
           <UrlPart ref="utmMedium"
                    title="Campaign Medium*"
                    description="This is the channel the link is being used in.
                      Use broad categories like email, social, or ppc."
-                   placeholder="Campaign Medium" />
+                   placeholder="Campaign Medium"
+                   error={errors.utmMedium} />
           
           <UrlPart ref="utmSource"
                    title="Campaign Source*"
@@ -110,7 +141,8 @@ define(['react', 'components/core'], function (React, Core) {
                      this link? For example, email is too broad for this one.
                      Use the name of your email list like newsletter or
                      customer list."
-                   placeholder="Campaign Source" />
+                   placeholder="Campaign Source"
+                   error={errors.utmSource} />
           
           <UrlPart ref="utmName"
                    title="Campaign Name*"
@@ -118,7 +150,8 @@ define(['react', 'components/core'], function (React, Core) {
                      your entire marketing campaign. This way, you can look at
                      all the links from this campaign even if you use them in
                      different places and channels."
-                   placeholder="Campaign Name" />
+                   placeholder="Campaign Name"
+                   error={errors.utmName} />
 
           <hr />
           
