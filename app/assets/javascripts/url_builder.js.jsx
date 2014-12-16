@@ -91,7 +91,7 @@ define(['react', 'components/core', 'zeroclipboard/ZeroClipboard'], function (Re
       var baseUrl, url, medium, source, name, content, term, errors;
 
       // Get the current state.
-      baseUrl = this.state.baseUrl;
+      baseUrl = this.state.baseUrl.trim();
       medium = this.state.utmMedium;
       source = this.state.utmSource;
       name = this.state.utmName;
@@ -104,8 +104,10 @@ define(['react', 'components/core', 'zeroclipboard/ZeroClipboard'], function (Re
       if (this.state.handleClick) {
         if (baseUrl === '')
           errors.baseUrl = 'Please type in the base URL.';
-        else if (!/^\s*https?:\/\/[\w-]+\.[\w-]+/.test(baseUrl))
+        else if (!/^(https?:\/\/)?[\w-]+\.[\w-]+/.test(baseUrl))
           errors.baseUrl = 'That does not look like a valid URL.'
+        else if (baseUrl.indexOf('http://') != 0 && baseUrl.indexOf('https://') != 0)
+          baseUrl = 'http://' + baseUrl;
         if (medium === '')
           errors.utmMedium = 'Please enter the campaign medium.';
         if (medium === '')
