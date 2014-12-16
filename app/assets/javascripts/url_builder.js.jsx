@@ -110,9 +110,9 @@ define(['react', 'components/core', 'zeroclipboard/ZeroClipboard'], function (Re
           baseUrl = 'http://' + baseUrl;
         if (medium === '')
           errors.utmMedium = 'Please enter the campaign medium.';
-        if (medium === '')
+        if (source === '')
           errors.utmSource = 'Please enter the campaign source.';
-        if (medium === '')
+        if (name === '')
           errors.utmName = 'Please enter the campaign name.';
       }
 
