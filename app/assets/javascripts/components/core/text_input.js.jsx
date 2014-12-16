@@ -1,5 +1,9 @@
 define(['react'], function (React) {
   return React.createClass({
+    getValue: function () {
+      return this.refs.input.getDOMNode().value;
+    },
+
     getInitialState: function () {
       return {
         value: this.props.value
@@ -15,7 +19,7 @@ define(['react'], function (React) {
     },
 
     render: function () {
-      return <input className={this.props.className} onChange={this.handleChange} type="text" value={this.state.value} name={this.props.name} placeholder={this.props.placeholder} />;
+      return <input ref="input" className={this.props.className} onChange={this.handleChange} type="text" value={this.props.value} name={this.props.name} placeholder={this.props.placeholder} />;
     }
   });
 });
