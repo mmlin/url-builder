@@ -50,8 +50,11 @@ define(['react', 'components/core', 'zeroclipboard/ZeroClipboard'], function (Re
       }
 
       // Upsert the new (UTM/tracking) parameters.
-      for (var key in newParams)
-        params[key] = newParams[key];
+      for (var key in newParams) {
+        var val = newParams[key];
+        if (val !== '')
+          params[key] = val;
+      }
 
       pairs = [];
       for (var key in params) {
