@@ -15,7 +15,7 @@ define(['react'], function (React) {
     },
 
     render: function () {
-      return <input className={this.props.className} onChange={this.handleChange} type="text" value={this.state.value} name={this.props.name} />;
+      return <input className={this.props.className} onChange={this.handleChange} type="text" value={this.state.value} name={this.props.name} placeholder={this.props.placeholder} />;
     }
   });
 });
