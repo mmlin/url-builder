@@ -73,6 +73,7 @@ define(['react', 'components/core'], function (React, Core) {
         utmContent: this.refs.utmContent.getValue(),
         utmTerm: this.refs.utmTerm.getValue()
       });
+      this.refs.result.focus();
     },
 
     getInitialState: function () {
@@ -146,7 +147,7 @@ define(['react', 'components/core'], function (React, Core) {
         <div className="url-builder-result">
           <div className="url-builder-result-content">
             <h2>Copy and paste your campaign link!</h2>
-            <Core.TextInput value={url} placeholder="http://example.com/utm_source=..." />
+            <Core.TextInput ref="result" value={url} placeholder="http://example.com/utm_source=..." />
             <button className="btn">Copy link to clipboard</button>
           </div>
         </div>
