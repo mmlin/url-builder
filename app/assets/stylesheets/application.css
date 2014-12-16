@@ -14,7 +14,171 @@
  *= require_self
  */
 
-#url-builder {
+body {
+  color: rgb(105, 105, 105);
+  font: 14px 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
   text-align: center;
-  padding: 1em;
+}
+
+.splash {
+  background-image: url(unsplash.jpg);
+  background-size: cover;
+  box-shadow: inset 0 0 0 1000px rgba(87,153,198,.8);
+  color: #fff;
+  padding-top: 20px;
+}
+.logo {
+  background-image: url(logo.png);
+  display: inline-block;
+  font-size: 0;
+  height: 31px;
+  width: 240px;
+  margin: 0;
+}
+h1 {
+  font-size: 42px;
+  font-weight: 300;
+  margin: auto;
+  max-width: 650px;
+  padding: 70px 10px;
+}
+.intro {
+  border-bottom: 1px solid #ddd;
+  padding: 50px 0;
+}
+.intro p {
+  font-size: 16px;
+  line-height: 24px;
+  margin: auto;
+  max-width: 650px;
+  padding: 10px;
+  text-align: left;
+}
+.instructions {
+  font-size: 32px;
+  font-weight: 300;
+  margin: 50px 10px 30px;
+}
+.url-builder-form {
+  border: 1px solid #ddd;
+  display: inline-block;
+  margin: 0 10px;
+  max-width: 960px;
+}
+.url-builder-form hr {
+  border: 0;
+  border-top: 1px solid #ddd;
+  margin: 10px 15px 0;
+}
+.url-builder-part {
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 20px;
+  text-align: left;
+  vertical-align: top;
+  width: 50%;
+}
+.url-builder-part h3 {
+  font-weight: 500;
+}
+.url-builder-part p {
+  color: #75828c;
+  font-size: 13px;
+  min-height: 60px;
+  line-height: 20px;
+}
+input[type=text] {
+  box-sizing: border-box;
+  font: 500 13px 'Helvetica Neue', Arial, sans-serif;
+  padding: 10px;
+  width: 100%;
+}
+.url-builder-form-actions {
+  background-color: #e6edf1;
+  padding: 20px;
+  text-align: right;
+}
+.url-builder-form-actions span {
+  float: left;
+  line-height: 37px;
+}
+.btn {
+  background-color: #268cd9;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 30px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.btn:hover {
+  background-color: #1E70AE;
+}
+.url-builder-result {
+  margin: 30px auto 60px;
+  max-width: 960px;
+  padding: 10px;
+}
+.url-builder-result-content {
+  background-color: #f0f9ff;
+  border: 1px solid #ccedfd;
+  padding: 50px;
+}
+.url-builder-result h2 {
+  color: #268cd9;
+  font-size: 32px;
+  font-weight: 300;
+  margin: 0 0 30px 0;
+}
+.url-builder-result input[type=text] {
+  width: 60%;
+}
+.url-builder-result button {
+  margin-left: 20px;
+}
+.footer {
+  background-color: #242e36;
+  padding: 50px 10px;
+}
+.footer .btn {
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 18px;
+  margin-top: 30px;
+  padding: 15px 45px;
+}
+.ga {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 100;
+  margin: 0;
+}
+.km {
+  color: #ee7311;
+  font-size: 32px;
+  font-weight: 100;
+  line-height: 48px;
+  margin: 0;
+}
+
+@media only screen and (max-width : 767px) {
+  h1, .instructions, .url-builder-result h2, .ga, .km {
+    font-size: 24px;
+  }
+  .url-builder-part {
+    width: 100%;
+  }
+  .url-builder-result input[type=text] {
+    width: 100%;
+  }
+  .url-builder-result button {
+    margin-left: 0;
+    margin-top: 10px;
+  }
 }

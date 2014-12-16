@@ -26,6 +26,9 @@ define(['react', 'components/core'], function (React, Core) {
     buildUrl: function (baseUrl, newParams) {
       var a, pairs, params, search;
 
+      if (!baseUrl)
+        return '';
+
       // Parse the base URL.
       a = document.createElement('a');
       a.href = baseUrl;
@@ -87,8 +90,6 @@ define(['react', 'components/core'], function (React, Core) {
       });
 
       return <div className="url-builder-content">
-
-        <h2>Fill out the form to build your link.</h2>
         <div className="url-builder-form">
 
           <UrlPart ref="baseUrl"
@@ -117,6 +118,8 @@ define(['react', 'components/core'], function (React, Core) {
                      all the links from this campaign even if you use them in
                      different places and channels."
                    placeholder="Campaign Name" />
+
+          <hr />
           
           <UrlPart ref="utmContent"
                    title="Campaign Content (optional)"
@@ -135,15 +138,17 @@ define(['react', 'components/core'], function (React, Core) {
           
           <div className="url-builder-form-actions">
             <span>*Required field.</span>
-            <button onClick={this.handleClick}>Build my link!</button>
+            <button className="btn" onClick={this.handleClick}>Build my link!</button>
           </div>
         
         </div>
 
         <div className="url-builder-result">
-          <h2>Copy and paste your campaign link!</h2>
-          <Core.TextInput value={url} placeholder="http://example.com/utm_source=..." />
-          <button>Copy link to clipboard</button>
+          <div className="url-builder-result-content">
+            <h2>Copy and paste your campaign link!</h2>
+            <Core.TextInput value={url} placeholder="http://example.com/utm_source=..." />
+            <button className="btn">Copy link to clipboard</button>
+          </div>
         </div>
 
       </div>;
