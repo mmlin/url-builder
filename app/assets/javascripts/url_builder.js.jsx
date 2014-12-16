@@ -1,4 +1,4 @@
-define(['react', 'components/core'], function (React, Core) {
+define(['react', 'components/core', 'zeroclipboard/ZeroClipboard'], function (React, Core, ZeroClipboard) {
 
   var UrlPart = React.createClass({
     getValue: function () {
@@ -63,6 +63,10 @@ define(['react', 'components/core'], function (React, Core) {
 
       search = '?' + pairs.join('&');
       return a.origin + a.pathname + search + a.hash;
+    },
+
+    componentDidMount: function () {
+      new ZeroClipboard(document.getElementById('copy-button'));
     },
 
     handleClick: function () {
@@ -180,8 +184,8 @@ define(['react', 'components/core'], function (React, Core) {
         <div className="url-builder-result">
           <div className="url-builder-result-content">
             <h2>Copy and paste your campaign link!</h2>
-            <Core.TextInput ref="result" value={url} placeholder="http://example.com/utm_source=..." />
-            <button className="btn">Copy link to clipboard</button>
+            <Core.TextInput ref="result" className="copy" value={url} placeholder="http://example.com/utm_source=..." />
+            <button id="copy-button" data-clipboard-text={url} className="btn">Copy link to clipboard</button>
           </div>
         </div>
 
